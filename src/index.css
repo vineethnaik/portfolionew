@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+    background-color: transparent;
+    color: var(--theme-text, #ffffff);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    @apply antialiased;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--theme-bg-secondary, #0a0a0a);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--theme-text-muted);
+  border-radius: 4px;
+}
+
+.theme-toggle:hover {
+  opacity: 1 !important;
+  color: var(--theme-text) !important;
+}
+
+.theme-btn-primary {
+  background-color: var(--theme-btn-bg);
+  color: var(--theme-btn-text);
+}
+.theme-btn-primary:hover {
+  opacity: 0.9;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.15);
+}
+
+.theme-btn-secondary {
+  background-color: transparent;
+  color: var(--theme-text);
+  border-color: var(--theme-btn-border);
+}
+.theme-btn-secondary:hover {
+  border-color: var(--theme-text);
+}
+
+.card-hover:hover {
+  border-color: var(--theme-text-muted) !important;
+}
+
+.contact-input {
+  background-color: var(--theme-input-bg);
+  border-color: var(--theme-border);
+  color: var(--theme-text);
+}
+.contact-input::placeholder {
+  color: var(--theme-text-muted);
+  opacity: 0.8;
+}
+.contact-input:focus {
+  border-color: var(--theme-text-muted);
+}
+
+@keyframes bounce-dot {
+  0%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+}
+.animate-bounce-dot {
+  animation: bounce-dot 0.6s ease-in-out infinite;
+}
