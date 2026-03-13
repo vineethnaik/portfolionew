@@ -10,7 +10,7 @@
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
     background-color: transparent;
-    color: var(--theme-text, #ffffff);
+    color: var(--theme-text);
     transition: background-color 0.5s ease, color 0.5s ease;
     @apply antialiased;
   }
@@ -21,7 +21,7 @@
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--theme-bg-secondary, #0a0a0a);
+  background: var(--theme-bg-secondary);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--theme-text-muted);

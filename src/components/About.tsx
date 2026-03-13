@@ -26,7 +26,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-24 sm:py-32 px-6 sm:px-8 transition-colors duration-500"
+      className="py-24 sm:py-32 px-6 sm:px-8 backdrop-blur-[2px] transition-colors duration-500"
       style={{ backgroundColor: 'var(--theme-section-bg)' }}
     >
       <div className="max-w-6xl mx-auto">

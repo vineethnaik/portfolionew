@@ -13,13 +13,16 @@ export default function AppBackground() {
         loop
         playsInline
         className="absolute inset-0 w-full h-full object-cover object-center"
+        style={{
+          filter: 'saturate(1.15) contrast(1.08) brightness(1.02)',
+        }}
       >
         <source src={videoSrc} type="video/mp4" />
       </video>
       <div
         className="absolute inset-0"
         style={{
-          backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.92)',
+          backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.25)' : 'rgba(255,255,255,0.28)',
         }}
       />
     </div>

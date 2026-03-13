@@ -4,7 +4,7 @@ import { projects } from '../data/projects'
 
 export default function Work() {
   return (
-    <section id="work" className="py-24 sm:py-32 px-6 sm:px-8" style={{ backgroundColor: 'var(--theme-section-bg)' }}>
+    <section id="work" className="py-24 sm:py-32 px-6 sm:px-8 backdrop-blur-[2px]" style={{ backgroundColor: 'var(--theme-section-bg)' }}>
       <div className="max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -26,7 +26,7 @@ export default function Work() {
             >
               <Link to={`/project/${project.slug}`}>
                 <div
-                  className="group p-8 sm:p-10 rounded-2xl transition-all duration-300 card-hover"
+                  className="group p-8 sm:p-10 rounded-2xl backdrop-blur-sm transition-all duration-300 card-hover"
                   style={{
                     backgroundColor: 'var(--theme-card-bg)',
                     border: '1px solid var(--theme-border)',

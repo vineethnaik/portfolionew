@@ -4,25 +4,25 @@ type Theme = 'light' | 'dark'
 
 const lightTheme = {
   '--theme-bg': '#ffffff',
-  '--theme-bg-secondary': '#f5f5f5',
-  '--theme-section-bg': '#ffffff',
-  '--theme-card-bg': '#f8f9fa',
+  '--theme-bg-secondary': '#ffffff',
+  '--theme-section-bg': 'rgba(255,255,255,0.15)',
+  '--theme-card-bg': 'rgba(255,255,255,0.55)',
   '--theme-text': '#111827',
   '--theme-text-secondary': '#374151',
   '--theme-text-muted': '#4b5563',
-  '--theme-border': 'rgba(0,0,0,0.12)',
+  '--theme-border': 'rgba(0,0,0,0.15)',
   '--theme-btn-bg': '#111827',
   '--theme-btn-text': '#ffffff',
-  '--theme-btn-border': 'rgba(0,0,0,0.25)',
+  '--theme-btn-border': 'rgba(0,0,0,0.3)',
   '--theme-photo-bg': '#e5e7eb',
-  '--theme-input-bg': 'rgba(0,0,0,0.04)',
+  '--theme-input-bg': 'rgba(0,0,0,0.06)',
 } as React.CSSProperties
 
 const darkTheme = {
   '--theme-bg': '#000000',
   '--theme-bg-secondary': '#0a0a0a',
-  '--theme-section-bg': 'rgba(0,0,0,0.2)',
-  '--theme-card-bg': 'rgba(0,0,0,0.4)',
+  '--theme-section-bg': 'rgba(0,0,0,0.12)',
+  '--theme-card-bg': 'rgba(0,0,0,0.35)',
   '--theme-text': '#ffffff',
   '--theme-text-secondary': '#b3b3b3',
   '--theme-text-muted': '#6b7280',

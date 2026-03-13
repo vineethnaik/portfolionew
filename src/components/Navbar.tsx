@@ -34,6 +34,7 @@ function ThemeToggle() {
 }
 
 export default function Navbar() {
+  const { theme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function Navbar() {
       style={
         scrolled
           ? {
-              backgroundColor: 'var(--theme-bg)',
+              backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.7)',
               borderColor: 'var(--theme-border)',
             }
           : {}
