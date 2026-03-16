@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
@@ -14,7 +15,53 @@ const item = {
   show: { opacity: 1, y: 0 },
 }
 
+const greetings = ['Hi', 'Hola', 'Bonjour', 'नमस्ते', 'こんにちは', '안녕하세요']
+
 export default function Hero() {
+  const [greetingIndex, setGreetingIndex] = useState(0)
+  const [charIndex, setCharIndex] = useState(0)
+  const [typedText, setTypedText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const current = greetings[greetingIndex]
+    const fullLength = current.length
+
+    let delay = isDeleting ? 70 : 130
+
+    if (!isDeleting && charIndex === fullLength) {
+      delay = 900
+    }
+
+    const timer = setTimeout(() => {
+      let nextDeleting = isDeleting
+      let nextGreetingIndex = greetingIndex
+      let nextCharIndex = charIndex
+
+      if (!isDeleting) {
+        if (charIndex < fullLength) {
+          nextCharIndex = charIndex + 1
+        } else {
+          nextDeleting = true
+        }
+      } else {
+        if (charIndex > 0) {
+          nextCharIndex = charIndex - 1
+        } else {
+          nextDeleting = false
+          nextGreetingIndex = (greetingIndex + 1) % greetings.length
+        }
+      }
+
+      setCharIndex(nextCharIndex)
+      setIsDeleting(nextDeleting)
+      setGreetingIndex(nextGreetingIndex)
+      setTypedText(current.slice(0, nextCharIndex))
+    }, delay)
+
+    return () => clearTimeout(timer)
+  }, [greetingIndex, charIndex, isDeleting])
+
   return (
     <section
       className="relative min-h-screen min-h-[100dvh] flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24"
@@ -26,6 +73,16 @@ export default function Hero() {
         className="relative max-w-4xl text-center"
         style={{ zIndex: 2 }}
       >
+        <motion.p
+          variants={item}
+          className="text-xs sm:text-sm md:text-base font-semibold tracking-[0.35em] uppercase mb-4 text-center"
+          style={{ color: 'var(--theme-text)' }}
+        >
+          <span className="inline-flex items-center justify-center gap-1 min-w-[6ch]">
+            <span>{typedText}</span>
+            <span className="inline-block w-[2px] h-4 sm:h-5 align-middle bg-[var(--theme-text)] animate-pulse rounded-full" />
+          </span>
+        </motion.p>
         <motion.h1
           variants={item}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold tracking-tight mb-3 sm:mb-4 leading-[1.08] sm:leading-[1.05]"

@@ -66,11 +66,11 @@ export default function Navbar() {
           className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           style={{ color: 'var(--theme-text)' }}
         >
-          <div className="w-8 h-8 overflow-hidden rounded-md border border-[rgba(255,255,255,0.12)] bg-black/40">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 overflow-hidden rounded-xl border border-[rgba(255,255,255,0.18)] bg-transparent">
             <img
-              src="/Design de logotipo de monograma vn de lu….jpg"
+              src="/logo.png"
               alt="Vineeth Naik logo"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </div>
           <span className="font-medium text-lg tracking-tight">Vineeth Naik</span>
