@@ -17,6 +17,15 @@ const item = {
 
 const greetings = ['Hi', 'Hola', 'Bonjour', 'नमस्ते', 'こんにちは', '안녕하세요']
 
+const greetingStyles = [
+  { fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", Inter, sans-serif', letterSpacing: '0.35em', fontWeight: 700 },
+  { fontFamily: '"SF Pro Display", system-ui, -apple-system, BlinkMacSystemFont, sans-serif', letterSpacing: '0.4em', fontWeight: 600 },
+  { fontFamily: '"Times New Roman", Georgia, serif', letterSpacing: '0.3em', fontWeight: 700 },
+  { fontFamily: '"Noto Sans Devanagari", system-ui, sans-serif', letterSpacing: '0.28em', fontWeight: 700 },
+  { fontFamily: '"Noto Sans JP", system-ui, sans-serif', letterSpacing: '0.32em', fontWeight: 600 },
+  { fontFamily: '"Noto Sans KR", system-ui, sans-serif', letterSpacing: '0.32em', fontWeight: 700 },
+]
+
 export default function Hero() {
   const [greetingIndex, setGreetingIndex] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
@@ -75,13 +84,24 @@ export default function Hero() {
       >
         <motion.p
           variants={item}
-          className="text-xs sm:text-sm md:text-base font-semibold tracking-[0.35em] uppercase mb-4 text-center"
-          style={{ color: 'var(--theme-text)' }}
+          className="text-xs sm:text-sm md:text-base uppercase mb-4 text-center"
+          style={{
+            color: 'var(--theme-text)',
+            fontFamily: greetingStyles[greetingIndex].fontFamily,
+            letterSpacing: greetingStyles[greetingIndex].letterSpacing,
+            fontWeight: greetingStyles[greetingIndex].fontWeight,
+          }}
         >
-          <span className="inline-flex items-center justify-center gap-1 min-w-[6ch]">
+          <motion.span
+            key={greetingIndex}
+            initial={{ opacity: 0, y: 4, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            className="inline-flex items-center justify-center gap-1 min-w-[6ch]"
+          >
             <span>{typedText}</span>
             <span className="inline-block w-[2px] h-4 sm:h-5 align-middle bg-[var(--theme-text)] animate-pulse rounded-full" />
-          </span>
+          </motion.span>
         </motion.p>
         <motion.h1
           variants={item}
