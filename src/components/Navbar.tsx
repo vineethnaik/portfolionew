@@ -63,10 +63,17 @@ export default function Navbar() {
       <nav className="max-w-6xl mx-auto px-6 sm:px-8 py-5 flex items-center justify-between">
         <Link
           to="/"
-          className="font-medium text-lg tracking-tight hover:opacity-80 transition-colors"
+          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           style={{ color: 'var(--theme-text)' }}
         >
-          Vineeth
+          <div className="w-8 h-8 overflow-hidden rounded-md border border-[rgba(255,255,255,0.12)] bg-black/40">
+            <img
+              src="/Design de logotipo de monograma vn de lu….jpg"
+              alt="Vineeth Naik logo"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <span className="font-medium text-lg tracking-tight">Vineeth Naik</span>
         </Link>
         <ul className="flex items-center gap-6">
           {navLinks.map(({ to, label, scrollTo }) => (
