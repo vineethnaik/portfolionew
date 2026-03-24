@@ -169,7 +169,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="sm:hidden fixed inset-0 z-40"
+            className="sm:hidden fixed inset-0 z-[60]"
             style={{ backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.95)' : 'rgba(255,255,255,0.95)' }}
           >
             <motion.nav
@@ -177,7 +177,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 h-full w-64 max-w-[80vw]"
+              className="fixed right-0 top-0 h-full w-64 max-w-[80vw] z-[70]"
               style={{ backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.98)' : 'rgba(255,255,255,0.98)' }}
             >
               <div className="flex flex-col h-full p-6">
