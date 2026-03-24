@@ -170,15 +170,28 @@ export default function Navbar() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="sm:hidden fixed inset-0 z-[60]"
-            style={{ backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.95)' : 'rgba(255,255,255,0.95)' }}
+            style={{ 
+              backgroundColor: theme === 'dark' 
+                ? 'rgba(0,0,0,0.98)' 
+                : 'rgba(255,255,255,0.98)',
+              backdropFilter: 'blur(8px)'
+            }}
           >
             <motion.nav
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed right-0 top-0 h-full w-64 max-w-[80vw] z-[70]"
-              style={{ backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.98)' : 'rgba(255,255,255,0.98)' }}
+              className="fixed right-0 top-0 h-full w-64 max-w-[80vw] z-[70] border-l"
+              style={{ 
+                backgroundColor: theme === 'dark' 
+                  ? 'var(--theme-bg)' 
+                  : 'var(--theme-bg)',
+                borderColor: 'var(--theme-border)',
+                boxShadow: theme === 'dark' 
+                  ? '-4px 0 24px rgba(0,0,0,0.3)' 
+                  : '-4px 0 24px rgba(0,0,0,0.1)'
+              }}
             >
               <div className="flex flex-col h-full p-6">
                 <div className="flex justify-end mb-8">
