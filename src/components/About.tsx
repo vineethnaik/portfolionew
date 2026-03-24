@@ -87,16 +87,16 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-24 grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="mt-20 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           {Object.entries(skills).map(([category, items]) => (
             <div key={category}>
-              <h4 className="font-medium mb-4" style={{ color: 'var(--theme-text)' }}>{category}</h4>
-              <div className="flex flex-wrap gap-2">
+              <h4 className="font-medium mb-3 sm:mb-4 text-base sm:text-lg" style={{ color: 'var(--theme-text)' }}>{category}</h4>
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {items.map((skill) => (
                   <span
                     key={skill}
-                    className="px-3 py-1.5 text-sm rounded-xl transition-colors duration-500"
+                    className="px-2.5 py-1 sm:px-3 sm:py-1.5 text-xs sm:text-sm rounded-xl transition-colors duration-500"
                     style={{
                       color: 'var(--theme-text-secondary)',
                       backgroundColor: 'var(--theme-card-bg)',
@@ -115,54 +115,54 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-24 space-y-12"
+          className="mt-20 sm:mt-24 space-y-8 sm:space-y-12"
         >
-          <h3 className="text-2xl font-semibold" style={{ color: 'var(--theme-text)' }}>Education & Experience</h3>
-          <div className="space-y-8">
+          <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--theme-text)' }}>Education & Experience</h3>
+          <div className="space-y-6 sm:space-y-8">
             <div
-              className="border-l-2 pl-8"
+              className="border-l-2 pl-6 sm:pl-8"
               style={{ borderColor: 'var(--theme-border)' }}
             >
-              <h4 className="text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>
+              <h4 className="text-lg sm:text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>
                 B.Tech – Computer Science & Engineering
               </h4>
               <p className="mb-2 text-sm" style={{ color: 'var(--theme-text-secondary)' }}>KL University</p>
-              <p className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>2023 – Present</p>
-              <p className="mt-2 text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
+              <p className="text-xs sm:text-sm" style={{ color: 'var(--theme-text-muted)' }}>2023 – Present</p>
+              <p className="mt-2 text-xs sm:text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
                 Relevant: Data Structures, DBMS, Machine Learning, AI, Cloud
                 Computing
               </p>
             </div>
             <div
-              className="border-l-2 pl-8"
+              className="border-l-2 pl-6 sm:pl-8"
               style={{ borderColor: 'var(--theme-border)' }}
             >
-              <h4 className="text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>Certifications</h4>
-              <ul className="space-y-1 text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
+              <h4 className="text-lg sm:text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>Certifications</h4>
+              <ul className="space-y-1 text-xs sm:text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
                 <li>• AWS Certified Cloud Practitioner (2025)</li>
                 <li>• Salesforce Certified AI Associate (2025)</li>
                 <li>• MongoDB Certified Developer Associate</li>
               </ul>
             </div>
             <div
-              className="border-l-2 pl-8"
+              className="border-l-2 pl-6 sm:pl-8"
               style={{ borderColor: 'var(--theme-border)' }}
             >
-              <h4 className="text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>
+              <h4 className="text-lg sm:text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>
                 Networking Virtual Internship – Juniper Networks
               </h4>
-              <p className="text-sm mb-2" style={{ color: 'var(--theme-text-muted)' }}>2024</p>
-              <p className="text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
+              <p className="text-xs sm:text-sm mb-2" style={{ color: 'var(--theme-text-muted)' }}>2024</p>
+              <p className="text-xs sm:text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
                 Routing concepts, network architecture, distributed
                 infrastructure systems.
               </p>
             </div>
             <div
-              className="border-l-2 pl-8"
+              className="border-l-2 pl-6 sm:pl-8"
               style={{ borderColor: 'var(--theme-border)' }}
             >
-              <h4 className="text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>Leadership</h4>
-              <p className="text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
+              <h4 className="text-lg sm:text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>Leadership</h4>
+              <p className="text-xs sm:text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
                 Led a cross-functional team in a Design Thinking & Innovation
                 Competition, securing 1st place by building a data-backed
                 solution.

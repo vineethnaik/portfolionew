@@ -75,3 +75,34 @@
 .animate-bounce-dot {
   animation: bounce-dot 0.6s ease-in-out infinite;
 }
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .card-hover:active {
+    border-color: var(--theme-text) !important;
+    transform: scale(0.98);
+  }
+  
+  .theme-btn-primary:active,
+  .theme-btn-secondary:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+  
+  a:active {
+    opacity: 0.7;
+  }
+}
+
+/* Better mobile tap targets */
+@media (max-width: 640px) {
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  input, textarea {
+    min-height: 44px;
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+}

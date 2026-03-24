@@ -75,12 +75,12 @@ export default function Contact() {
           >
             vineethnaikeslavath@gmail.com
           </a>
-          <div className="flex justify-center gap-8">
+          <div className="flex justify-center gap-6 sm:gap-8">
             <a
               href="https://github.com/vineethnaik"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:opacity-100 opacity-80"
+              className="transition-colors hover:opacity-100 opacity-80 text-sm sm:text-base"
               style={{ color: 'var(--theme-text-secondary)' }}
             >
               GitHub
@@ -89,7 +89,7 @@ export default function Contact() {
               href="https://linkedin.com/in/eslavath-vineeth-naik-a8ab16285"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:opacity-100 opacity-80"
+              className="transition-colors hover:opacity-100 opacity-80 text-sm sm:text-base"
               style={{ color: 'var(--theme-text-secondary)' }}
             >
               LinkedIn
@@ -113,7 +113,7 @@ export default function Contact() {
               id="name"
               name="name"
               required
-              className="w-full px-4 py-3 rounded-2xl border focus:outline-none transition-colors contact-input"
+              className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors contact-input text-base"
               placeholder="Your name"
             />
           </div>
@@ -126,7 +126,7 @@ export default function Contact() {
               id="email"
               name="_replyto"
               required
-              className="w-full px-4 py-3 rounded-2xl border focus:outline-none transition-colors contact-input"
+              className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors contact-input text-base"
               placeholder="your@email.com"
             />
           </div>
@@ -139,7 +139,7 @@ export default function Contact() {
               name="message"
               required
               rows={5}
-              className="w-full px-4 py-3 rounded-2xl border focus:outline-none transition-colors resize-none contact-input"
+              className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors resize-none contact-input text-base"
               placeholder="Your message"
             />
           </div>
@@ -147,7 +147,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className={`inline-flex items-center justify-center gap-2 px-8 py-3 rounded-2xl font-medium transition-all duration-300 min-w-[180px] ${
+              className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 sm:py-3 rounded-2xl font-medium transition-all duration-300 min-w-[180px] text-base ${
                 status === 'success'
                   ? 'bg-green-500 text-white'
                   : status === 'error'

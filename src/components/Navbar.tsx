@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../contexts/ThemeContext'
 
 const navLinks = [
@@ -36,12 +36,24 @@ function ThemeToggle() {
 export default function Navbar() {
   const { theme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [mobileMenuOpen])
 
   return (
     <motion.header
@@ -73,14 +85,16 @@ export default function Navbar() {
               className="w-full h-full object-contain"
             />
           </div>
-          <span className="font-medium text-lg tracking-tight">Vineeth Naik</span>
+          <span className="font-medium text-lg tracking-tight hidden sm:block">Vineeth Naik</span>
         </Link>
-        <ul className="flex items-center gap-6">
+        
+        {/* Desktop Navigation */}
+        <ul className="hidden sm:flex items-center gap-6">
           {navLinks.map(({ to, label, scrollTo }) => (
             <li key={label}>
               <Link
                 to={to}
-                onClick={(e) => {
+                onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
                   if (scrollTo && window.location.pathname === '/') {
                     e.preventDefault()
                     document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' })
@@ -101,7 +115,128 @@ export default function Navbar() {
             <ThemeToggle />
           </li>
         </ul>
+
+        {/* Mobile Menu Button */}
+        <div className="flex items-center gap-4 sm:hidden">
+          <ThemeToggle />
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-xl transition-colors"
+            style={{ color: 'var(--theme-text)' }}
+            aria-label="Toggle menu"
+          >
+            <motion.svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              animate={mobileMenuOpen ? "open" : "closed"}
+            >
+              <motion.path
+                variants={{
+                  closed: { d: "M4 6h16" },
+                  open: { d: "M6 18L18 6" }
+                }}
+              />
+              <motion.path
+                variants={{
+                  closed: { d: "M4 12h16", opacity: 1 },
+                  open: { d: "M6 6L18 18", opacity: 0 }
+                }}
+                transition={{ duration: 0.1 }}
+              />
+              <motion.path
+                variants={{
+                  closed: { d: "M4 18h16" },
+                  open: { d: "M6 6L18 18" }
+                }}
+              />
+            </motion.svg>
+          </button>
+        </div>
       </nav>
+      
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="sm:hidden fixed inset-0 z-40"
+            style={{ backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.95)' : 'rgba(255,255,255,0.95)' }}
+          >
+            <motion.nav
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed right-0 top-0 h-full w-64 max-w-[80vw]"
+              style={{ backgroundColor: theme === 'dark' ? 'rgba(0,0,0,0.98)' : 'rgba(255,255,255,0.98)' }}
+            >
+              <div className="flex flex-col h-full p-6">
+                <div className="flex justify-end mb-8">
+                  <button
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 rounded-xl transition-colors"
+                    style={{ color: 'var(--theme-text)' }}
+                    aria-label="Close menu"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+                
+                <ul className="flex flex-col gap-6">
+                  {navLinks.map(({ to, label, scrollTo }) => (
+                    <li key={label}>
+                      <Link
+                        to={to}
+                        onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
+                          setMobileMenuOpen(false)
+                          if (scrollTo && window.location.pathname === '/') {
+                            e.preventDefault()
+                            setTimeout(() => {
+                              document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' })
+                            }, 100)
+                          }
+                        }}
+                        className="text-lg font-medium transition-colors block py-2"
+                        style={{ color: 'var(--theme-text-secondary)' }}
+                      >
+                        {label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                
+                <div className="mt-auto pt-8">
+                  <div className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>
+                    © 2024 Vineeth Naik
+                  </div>
+                </div>
+              </div>
+            </motion.nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   )
 }
