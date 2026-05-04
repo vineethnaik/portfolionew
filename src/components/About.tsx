@@ -140,7 +140,8 @@ export default function About() {
               <h4 className="text-lg sm:text-xl font-medium mb-2" style={{ color: 'var(--theme-text)' }}>Certifications</h4>
               <ul className="space-y-1 text-xs sm:text-sm" style={{ color: 'var(--theme-text-secondary)' }}>
                 <li>• AWS Certified Cloud Practitioner (2025)</li>
-                <li>• Salesforce Certified AI Associate (2025)</li>
+                <li>• AWS Certified Developer Associate (2026)</li>
+                <li>• Github Foundations Certified (2026)</li>
                 <li>• MongoDB Certified Developer Associate</li>
               </ul>
             </div>

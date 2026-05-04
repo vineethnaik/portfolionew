@@ -55,6 +55,43 @@
   border-color: var(--theme-text-muted) !important;
 }
 
+/* Selected Work — horizontal strip */
+.work-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--theme-text-muted) 55%, transparent) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+.work-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+.work-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.work-scroll::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--theme-text-muted) 45%, transparent);
+  border-radius: 999px;
+}
+
+.work-card {
+  transition:
+    box-shadow 0.4s ease,
+    border-color 0.35s ease,
+    transform 0.35s ease;
+}
+.work-card:hover {
+  border-color: color-mix(in srgb, var(--theme-text) 22%, var(--theme-border)) !important;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #22d3ee 35%, transparent),
+    0 0 48px color-mix(in srgb, #a855f7 18%, transparent),
+    0 24px 48px color-mix(in srgb, #000 35%, transparent);
+}
+.work-card:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, #22d3ee 55%, transparent),
+    0 0 36px color-mix(in srgb, #a855f7 22%, transparent);
+}
+
 .contact-input {
   background-color: var(--theme-input-bg);
   border-color: var(--theme-border);
