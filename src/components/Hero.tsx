@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 
 const container = {
@@ -27,6 +27,8 @@ const greetingStyles = [
 ]
 
 export default function Hero() {
+  const navigate = useNavigate()
+  const location = useLocation()
   const [greetingIndex, setGreetingIndex] = useState(0)
   const [charIndex, setCharIndex] = useState(0)
   const [typedText, setTypedText] = useState('')
@@ -71,6 +73,15 @@ export default function Hero() {
     return () => clearTimeout(timer)
   }, [greetingIndex, charIndex, isDeleting])
 
+  const handleSectionNavigate = (sectionId: string) => {
+    if (location.pathname === '/') {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+      return
+    }
+
+    navigate(`/#${sectionId}`)
+  }
+
   return (
     <section
       className="relative min-h-screen min-h-[100dvh] flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24"
@@ -108,43 +119,43 @@ export default function Hero() {
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight mb-3 sm:mb-4 leading-[1.1] sm:leading-[1.08]"
           style={{ color: 'var(--theme-text)' }}
         >
-          I'm Vineeth Naik
+          Hi, I'm Vineeth Naik  
         </motion.h1>
         <motion.p
           variants={item}
-          className="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6"
+          className="text-sm sm:text-base md:text-lg lg:text-xl mb-4 sm:mb-6 max-w-3xl mx-auto"
           style={{ color: 'var(--theme-text)' }}
         >
-          AI / Machine Learning Engineer & Cloud Developer
+          I design and engineer end-to-end digital products from intuitive interfaces to resilient backend systems.
         </motion.p>
         <motion.p
           variants={item}
           className="text-sm sm:text-base md:text-lg max-w-2xl mb-6 sm:mb-8 md:mb-10 lg:mb-12 leading-relaxed mx-auto px-1"
           style={{ color: 'var(--theme-text-secondary)' }}
         >
-          Computer Science undergraduate specializing in Machine Learning, Data
-          Analytics, and Cloud Systems. I build intelligent systems using
-          Python, AWS, and scalable backend architectures.
         </motion.p>
         <motion.div variants={item} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-          <Link
-            to="/#work"
-            className="theme-btn-primary inline-flex items-center justify-center px-6 py-3 sm:px-6 sm:py-3 text-sm sm:text-base font-medium rounded-2xl transition-all duration-300 w-full sm:w-auto min-h-[44px]"
-          >
-            View Work
-          </Link>
           <a
             href="/DS_and_AI_Resume.pdf"
             download="DS_and_AI_Resume.pdf"
-            className="theme-btn-secondary inline-flex items-center justify-center px-6 py-3 sm:px-6 sm:py-3 text-sm sm:text-base border rounded-2xl font-medium transition-all duration-300 w-full sm:w-auto min-h-[44px]"
+            className="theme-btn-primary inline-flex items-center justify-center px-7 py-3.5 text-sm sm:text-base font-semibold rounded-2xl transition-all duration-300 w-full sm:w-auto min-h-[48px] shadow-[0_0_24px_rgba(255,255,255,0.15)]"
+            aria-label="Download Vineeth Naik resume"
           >
             Download Resume
           </a>
+          <button
+            type="button"
+            onClick={() => handleSectionNavigate('work')}
+            className="theme-btn-secondary inline-flex items-center justify-center px-6 py-3 sm:px-6 sm:py-3 text-sm sm:text-base border rounded-2xl font-medium transition-all duration-300 w-full sm:w-auto min-h-[44px]"
+            aria-label="Go to work section"
+          >
+            View Work
+          </button>
           <Link
             to="/#contact"
             onClick={(e) => {
               e.preventDefault()
-              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+              handleSectionNavigate('contact')
             }}
             className="theme-btn-secondary inline-flex items-center justify-center px-6 py-3 sm:px-6 sm:py-3 text-sm sm:text-base border rounded-2xl font-medium hover:opacity-100 transition-all duration-300 w-full sm:w-auto min-h-[44px]"
           >

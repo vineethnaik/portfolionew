@@ -28,12 +28,12 @@ export default function Work() {
           className="mb-10 max-w-xl text-sm sm:text-base leading-relaxed"
           style={{ color: 'var(--theme-text-secondary)' }}
         >
-          Drag or swipe sideways to explore projects — each opens a full case study.
+          Explore selected projects focused on engineering quality, product outcomes, and measurable impact.
         </p>
       </div>
 
       <div
-        className="work-scroll flex gap-5 sm:gap-6 md:gap-8 overflow-x-auto overscroll-x-contain snap-x snap-mandatory scroll-pl-6 scroll-pr-6 px-6 sm:px-8 pb-2 sm:pb-4"
+        className="mx-auto grid max-w-6xl grid-cols-[repeat(auto-fit,minmax(290px,1fr))] justify-center gap-5 px-6 sm:gap-6 sm:px-8 md:gap-8"
         role="list"
         aria-label="Project cards"
       >
@@ -44,63 +44,103 @@ export default function Work() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ delay: index * 0.08, duration: 0.45 }}
-            className="snap-start shrink-0 w-[min(100vw-3rem,22rem)] sm:w-[26rem] lg:w-[28rem]"
+            className="w-full place-self-center"
             role="listitem"
           >
-            <Link
-              to={`/project/${project.slug}`}
-              className="block h-full rounded-2xl focus-visible:outline-none"
+            <div
+              className={`${cardBase} card-hover`}
+              style={{
+                backgroundColor: 'var(--theme-card-bg)',
+                border: '1px solid var(--theme-border)',
+              }}
             >
               <div
-                className={`${cardBase} card-hover`}
-                style={{
-                  backgroundColor: 'var(--theme-card-bg)',
-                  border: '1px solid var(--theme-border)',
-                }}
-              >
-                <div
-                  className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent opacity-80"
-                  aria-hidden
-                />
-                <div>
-                  <h3
-                    className="text-lg sm:text-xl lg:text-2xl font-semibold mb-3 leading-snug pr-6 transition-colors"
-                    style={{ color: 'var(--theme-text)' }}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    className="text-sm sm:text-base mb-5 line-clamp-4 leading-relaxed"
-                    style={{ color: 'var(--theme-text-secondary)' }}
-                  >
-                    {project.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {project.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="px-2.5 py-1 text-xs rounded-full"
-                        style={{
-                          color: 'var(--theme-text-muted)',
-                          border: '1px solid var(--theme-border)',
-                        }}
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <span
-                  className="inline-flex items-center gap-2 font-medium group-hover:gap-3 transition-all text-sm"
+                className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent opacity-80"
+                aria-hidden
+              />
+              <div>
+                <h3
+                  className="text-lg sm:text-xl lg:text-2xl font-semibold mb-3 leading-snug pr-6 transition-colors"
                   style={{ color: 'var(--theme-text)' }}
                 >
+                  {project.title}
+                </h3>
+                <p
+                  className="text-sm sm:text-base mb-5 line-clamp-4 leading-relaxed"
+                  style={{ color: 'var(--theme-text-secondary)' }}
+                >
+                  {project.description}
+                </p>
+
+                <ul className="mb-6 space-y-3 text-xs sm:text-sm">
+                  <li style={{ color: 'var(--theme-text-secondary)' }}>
+                    <span className="block mb-1 font-medium" style={{ color: 'var(--theme-text)' }}>
+                      Challenge / Problem
+                    </span>
+                    {project.problemSolved}
+                  </li>
+                  <li style={{ color: 'var(--theme-text-secondary)' }}>
+                    <span className="block mb-1 font-medium" style={{ color: 'var(--theme-text)' }}>
+                      Solution & Tech
+                    </span>
+                    {project.keyFeatures[0]}
+                  </li>
+                  <li style={{ color: 'var(--theme-text-secondary)' }}>
+                    <span className="block mb-1 font-medium" style={{ color: 'var(--theme-text)' }}>
+                      Impact
+                    </span>
+                    {project.impact}
+                  </li>
+                </ul>
+
+                <div className="flex flex-wrap gap-2 mb-7">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-2.5 py-1 text-xs rounded-full"
+                      style={{
+                        color: 'var(--theme-text-muted)',
+                        border: '1px solid var(--theme-border)',
+                      }}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href={project.liveUrl}
+                  target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+                  rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="theme-btn-primary inline-flex items-center justify-center px-4 py-2 text-sm rounded-xl font-medium transition-all duration-300"
+                  aria-label={`View live demo for ${project.title}`}
+                >
+                  Live Demo
+                </a>
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="theme-btn-secondary inline-flex items-center justify-center px-4 py-2 text-sm rounded-xl border font-medium transition-all duration-300"
+                  aria-label={`View GitHub repository for ${project.title}`}
+                >
+                  GitHub
+                </a>
+                <Link
+                  to={`/project/${project.slug}`}
+                  className="inline-flex items-center gap-2 font-medium transition-all text-sm hover:opacity-80"
+                  style={{ color: 'var(--theme-text)' }}
+                  aria-label={`Open case study for ${project.title}`}
+                >
                   View Case Study
-                  <span className="group-hover:translate-x-1 transition-transform" aria-hidden>
+                  <span className="transition-transform group-hover:translate-x-1" aria-hidden>
                     →
                   </span>
-                </span>
+                </Link>
               </div>
-            </Link>
+            </div>
           </motion.article>
         ))}
       </div>

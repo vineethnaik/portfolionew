@@ -2,8 +2,12 @@ export interface Project {
   id: string
   title: string
   description: string
-  highlights: string[]
+  problemSolved: string
+  keyFeatures: string[]
+  impact: string
   tech: string[]
+  githubUrl: string
+  liveUrl: string
   slug: string
 }
 
@@ -13,13 +17,19 @@ export const projects: Project[] = [
     title: 'AI-Based Healthcare Revenue Cycle Prediction System',
     description:
       'Machine learning system that predicts insurance claim denials, payment delays, and appointment no-shows using Random Forest models.',
-    highlights: [
-      'Trained ML models on healthcare claim data',
-      'Achieved 85% prediction accuracy (ROC-AUC 0.88)',
-      'Reduced claim validation time from 5–10 minutes to instant processing',
-      'Deployed real-time REST APIs',
+    problemSolved:
+      'Healthcare teams were losing revenue to delayed claim reviews and reactive handling of denied claims.',
+    keyFeatures: [
+      'Real-time risk scoring API for denials, payment delays, and no-shows',
+      'Model training pipeline with reproducible evaluation metrics',
+      'Dashboard workflows for faster triage and intervention',
+      'Integrated backend services for production-ready deployment',
     ],
+    impact:
+      'Enabled proactive claim handling, reduced manual validation effort, and improved financial decision-making speed for operations teams.',
     tech: ['Python', 'Scikit-learn', 'React', 'Spring Boot', 'MySQL'],
+    githubUrl: 'https://github.com/vineethnaik',
+    liveUrl: '#',
     slug: 'healthcare-revenue-cycle-prediction',
   },
   {
@@ -27,13 +37,19 @@ export const projects: Project[] = [
     title: 'LLM Benchmarking for Automated Cloud Deployment',
     description:
       'Evaluation framework to analyze LLM-generated Infrastructure-as-Code deployments for cloud automation reliability.',
-    highlights: [
-      'Built benchmarking pipeline for Docker + Kubernetes deployments',
-      'Measured deployment accuracy, execution time, and cost efficiency',
-      'Improved configuration success rate by 18%',
-      'Conducted statistical failure analysis',
+    problemSolved:
+      'Teams lacked a reliable way to evaluate whether LLM-generated cloud configurations were production-safe and cost-efficient.',
+    keyFeatures: [
+      'Automated benchmark suite for Docker and Kubernetes deployment scenarios',
+      'Standardized scoring across accuracy, runtime, and cloud cost',
+      'Failure-mode analytics for prompt and model improvement',
+      'Extensible framework for comparing multiple LLM providers',
     ],
+    impact:
+      'Improved deployment success consistency, reduced trial-and-error in DevOps workflows, and provided objective model-selection criteria.',
     tech: ['Docker', 'Kubernetes', 'Python', 'Cloud Infrastructure'],
+    githubUrl: 'https://github.com/vineethnaik',
+    liveUrl: '#',
     slug: 'llm-benchmarking-cloud-deployment',
   },
 ]

@@ -88,6 +88,26 @@ export default function ProjectCaseStudy() {
               </span>
             ))}
           </div>
+          <div className="flex flex-wrap gap-3 mb-16">
+            <a
+              href={project.liveUrl}
+              target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+              rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+              className="theme-btn-primary inline-flex items-center justify-center px-4 py-2 text-sm rounded-xl font-medium transition-all duration-300"
+              aria-label={`View live demo for ${project.title}`}
+            >
+              Live Demo
+            </a>
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="theme-btn-secondary inline-flex items-center justify-center px-4 py-2 text-sm rounded-xl border font-medium transition-all duration-300"
+              aria-label={`View GitHub repository for ${project.title}`}
+            >
+              GitHub
+            </a>
+          </div>
 
           <div className="space-y-16">
             <section>
@@ -123,6 +143,22 @@ export default function ProjectCaseStudy() {
               </h2>
               <p className="text-lg leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>
                 {content.solution}
+              </p>
+              <ul className="mt-6 space-y-2">
+                {project.keyFeatures.map((feature) => (
+                  <li key={feature} className="text-base leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>
+                    - {feature}
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section>
+              <h2 className="text-sm font-medium uppercase tracking-wider mb-4" style={{ color: 'var(--theme-text-muted)' }}>
+                Impact
+              </h2>
+              <p className="text-lg leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>
+                {project.impact}
               </p>
             </section>
 

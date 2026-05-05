@@ -37,11 +37,38 @@ export default function Navbar() {
   const { theme } = useTheme()
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('work')
+  const year = new Date().getFullYear()
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const sectionIds = ['work', 'about', 'contact']
+    const sectionElements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => Boolean(el))
+
+    if (!sectionElements.length) return
+
+    const updateActiveSection = () => {
+      const offset = window.scrollY + 180
+      for (const section of sectionElements) {
+        const top = section.offsetTop
+        const bottom = top + section.offsetHeight
+        if (offset >= top && offset < bottom) {
+          setActiveSection(section.id)
+          return
+        }
+      }
+    }
+
+    updateActiveSection()
+    window.addEventListener('scroll', updateActiveSection)
+    return () => window.removeEventListener('scroll', updateActiveSection)
   }, [])
 
   useEffect(() => {
@@ -98,14 +125,17 @@ export default function Navbar() {
                   if (scrollTo && window.location.pathname === '/') {
                     e.preventDefault()
                     document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' })
+                    setActiveSection(scrollTo)
                   }
                 }}
                 className="relative text-sm font-medium transition-colors group"
-                style={{ color: 'var(--theme-text-secondary)' }}
+                style={{ color: activeSection === scrollTo ? 'var(--theme-text)' : 'var(--theme-text-secondary)' }}
               >
                 {label}
                 <span
-                  className="absolute -bottom-1 left-0 w-0 h-px group-hover:w-full transition-all duration-300"
+                  className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
+                    activeSection === scrollTo ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}
                   style={{ backgroundColor: 'var(--theme-text)' }}
                 />
               </Link>
@@ -226,13 +256,14 @@ export default function Navbar() {
                           setMobileMenuOpen(false)
                           if (scrollTo && window.location.pathname === '/') {
                             e.preventDefault()
+                            setActiveSection(scrollTo)
                             setTimeout(() => {
                               document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' })
                             }, 100)
                           }
                         }}
                         className="text-lg font-medium transition-colors block py-2"
-                        style={{ color: 'var(--theme-text-secondary)' }}
+                        style={{ color: activeSection === scrollTo ? 'var(--theme-text)' : 'var(--theme-text-secondary)' }}
                       >
                         {label}
                       </Link>
@@ -242,7 +273,7 @@ export default function Navbar() {
                 
                 <div className="mt-auto pt-8">
                   <div className="text-sm" style={{ color: 'var(--theme-text-muted)' }}>
-                    © 2024 Vineeth Naik
+                    © {year} Vineeth Naik
                   </div>
                 </div>
               </div>

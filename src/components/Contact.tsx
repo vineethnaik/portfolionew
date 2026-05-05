@@ -51,7 +51,7 @@ export default function Contact() {
           className="text-4xl sm:text-5xl font-semibold mb-6"
           style={{ color: 'var(--theme-text)' }}
         >
-          Let's connect
+          Let&apos;s connect and build something amazing together.
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -60,7 +60,7 @@ export default function Contact() {
           className="text-lg mb-12"
           style={{ color: 'var(--theme-text-secondary)' }}
         >
-          Thanks for stopping by. Feel free to reach out.
+          Open to impactful product engineering roles and collaboration opportunities.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -70,10 +70,12 @@ export default function Contact() {
         >
           <a
             href="mailto:vineethnaikeslavath@gmail.com"
-            className="block transition-colors hover:opacity-70"
+            className="inline-flex items-center gap-2 transition-colors hover:opacity-80"
             style={{ color: 'var(--theme-text)' }}
+            aria-label="Send an email to Vineeth Naik"
           >
-            vineethnaikeslavath@gmail.com
+            Email directly:
+            <span className="underline underline-offset-4">vineethnaikeslavath@gmail.com</span>
           </a>
           <div className="flex justify-center gap-6 sm:gap-8">
             <a
@@ -82,6 +84,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="transition-colors hover:opacity-100 opacity-80 text-sm sm:text-base"
               style={{ color: 'var(--theme-text-secondary)' }}
+              aria-label="Visit Vineeth Naik GitHub profile"
             >
               GitHub
             </a>
@@ -91,6 +94,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="transition-colors hover:opacity-100 opacity-80 text-sm sm:text-base"
               style={{ color: 'var(--theme-text-secondary)' }}
+              aria-label="Visit Vineeth Naik LinkedIn profile"
             >
               LinkedIn
             </a>

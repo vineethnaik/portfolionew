@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import AppBackground from './components/AppBackground'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -21,6 +22,19 @@ function HomePage() {
 }
 
 export default function App() {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (!location.hash) return
+    const targetId = location.hash.replace('#', '')
+    const target = document.getElementById(targetId)
+    if (!target) return
+
+    requestAnimationFrame(() => {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+  }, [location.pathname, location.hash])
+
   return (
     <div
       className="relative min-h-screen transition-colors duration-500"

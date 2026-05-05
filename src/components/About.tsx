@@ -65,19 +65,20 @@ export default function About() {
               style={{ color: 'var(--theme-text-secondary)' }}
             >
               <p>
-                I am a Computer Science undergraduate at KL University
-                specializing in Machine Learning and Data Analytics.
+                I approach engineering with a focus on clean architecture,
+                maintainable code, and systems that scale without sacrificing
+                developer velocity.
               </p>
               <p>
-                My interests lie in building AI-driven systems, scalable cloud
-                applications, and data analytics solutions. I enjoy combining
-                machine learning models with cloud infrastructure to build
-                intelligent, production-ready applications.
+                My work aligns frontend clarity with backend reliability so
+                product experiences stay fast, intuitive, and stable as usage
+                grows.
               </p>
               <p>
-                I am currently seeking opportunities in AI/ML engineering, data
-                science, and cloud systems where I can apply machine learning to
-                real-world challenges.
+                I collaborate effectively across design, product, and
+                engineering teams, adapt quickly to evolving requirements, and
+                prioritize shipping solutions that deliver measurable user and
+                business outcomes.
               </p>
             </motion.div>
           </div>
