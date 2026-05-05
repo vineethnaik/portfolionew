@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../contexts/ThemeContext'
 
 const navLinks = [
   { to: '/#work', label: 'Work', scrollTo: 'work' },
   { to: '/#about', label: 'About', scrollTo: 'about' },
-  { to: '/#work', label: 'Projects', scrollTo: 'work' },
   { to: '/#contact', label: 'Contact', scrollTo: 'contact' },
 ]
 
@@ -35,6 +34,7 @@ function ThemeToggle() {
 
 export default function Navbar() {
   const { theme } = useTheme()
+  const location = useLocation()
   const [scrolled, setScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('work')
@@ -47,12 +47,24 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
+    if (location.pathname !== '/') {
+      setActiveSection('')
+      return
+    }
+
     const sectionIds = ['work', 'about', 'contact']
     const sectionElements = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el))
 
     if (!sectionElements.length) return
+
+    if (location.hash) {
+      const hashTarget = location.hash.replace('#', '')
+      if (sectionIds.includes(hashTarget)) {
+        setActiveSection(hashTarget)
+      }
+    }
 
     const updateActiveSection = () => {
       const offset = window.scrollY + 180
@@ -69,7 +81,7 @@ export default function Navbar() {
     updateActiveSection()
     window.addEventListener('scroll', updateActiveSection)
     return () => window.removeEventListener('scroll', updateActiveSection)
-  }, [])
+  }, [location.pathname, location.hash])
 
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -81,6 +93,24 @@ export default function Navbar() {
       document.body.style.overflow = 'unset'
     }
   }, [mobileMenuOpen])
+
+  const handleSectionClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    scrollTo: string,
+    closeMobileMenu = false
+  ) => {
+    if (closeMobileMenu) {
+      setMobileMenuOpen(false)
+    }
+
+    if (location.pathname !== '/') {
+      return
+    }
+
+    e.preventDefault()
+    document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' })
+    setActiveSection(scrollTo)
+  }
 
   return (
     <motion.header
@@ -122,19 +152,16 @@ export default function Navbar() {
               <Link
                 to={to}
                 onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                  if (scrollTo && window.location.pathname === '/') {
-                    e.preventDefault()
-                    document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' })
-                    setActiveSection(scrollTo)
-                  }
+                  handleSectionClick(e, scrollTo)
                 }}
                 className="relative text-sm font-medium transition-colors group"
                 style={{ color: activeSection === scrollTo ? 'var(--theme-text)' : 'var(--theme-text-secondary)' }}
+                aria-current={activeSection === scrollTo ? 'page' : undefined}
               >
                 {label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-px transition-all duration-300 ${
-                    activeSection === scrollTo ? 'w-full' : 'w-0 group-hover:w-full'
+                  className={`absolute -bottom-1 left-0 h-px w-full origin-left transition-transform duration-300 ease-out ${
+                    activeSection === scrollTo ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                   }`}
                   style={{ backgroundColor: 'var(--theme-text)' }}
                 />
@@ -253,17 +280,11 @@ export default function Navbar() {
                       <Link
                         to={to}
                         onClick={(e: React.MouseEvent<HTMLAnchorElement>) => {
-                          setMobileMenuOpen(false)
-                          if (scrollTo && window.location.pathname === '/') {
-                            e.preventDefault()
-                            setActiveSection(scrollTo)
-                            setTimeout(() => {
-                              document.getElementById(scrollTo)?.scrollIntoView({ behavior: 'smooth' })
-                            }, 100)
-                          }
+                          handleSectionClick(e, scrollTo, true)
                         }}
                         className="text-lg font-medium transition-colors block py-2"
                         style={{ color: activeSection === scrollTo ? 'var(--theme-text)' : 'var(--theme-text-secondary)' }}
+                        aria-current={activeSection === scrollTo ? 'page' : undefined}
                       >
                         {label}
                       </Link>
