@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import ScrollReveal from './ScrollReveal'
 
 const skills = {
   'Programming': ['Python', 'Java', 'SQL'],
@@ -31,12 +31,7 @@ export default function About() {
     >
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="flex justify-center md:justify-start"
-          >
+          <ScrollReveal className="flex justify-center md:justify-start">
             <div
               className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl flex items-center justify-center overflow-hidden transition-colors duration-500"
               style={{
@@ -46,24 +41,15 @@ export default function About() {
             >
               <span className="text-6xl font-light opacity-30" style={{ color: 'var(--theme-text)' }}>VN</span>
             </div>
-          </motion.div>
-          <div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+          </ScrollReveal>
+          <ScrollReveal>
+            <h2
               className="text-3xl sm:text-4xl font-semibold mb-8"
               style={{ color: 'var(--theme-text)' }}
             >
               About
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-6 text-lg leading-relaxed"
-              style={{ color: 'var(--theme-text-secondary)' }}
-            >
+            </h2>
+            <div className="space-y-6 text-lg leading-relaxed" style={{ color: 'var(--theme-text-secondary)' }}>
               <p>
                 I approach engineering with a focus on clean architecture,
                 maintainable code, and systems that scale without sacrificing
@@ -80,16 +66,11 @@ export default function About() {
                 prioritize shipping solutions that deliver measurable user and
                 business outcomes.
               </p>
-            </motion.div>
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-        >
+        <ScrollReveal className="mt-20 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {Object.entries(skills).map(([category, items]) => (
             <div key={category}>
               <h4 className="font-medium mb-3 sm:mb-4 text-base sm:text-lg" style={{ color: 'var(--theme-text)' }}>{category}</h4>
@@ -110,14 +91,9 @@ export default function About() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </ScrollReveal>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20 sm:mt-24 space-y-8 sm:space-y-12"
-        >
+        <ScrollReveal className="mt-20 sm:mt-24 space-y-8 sm:space-y-12">
           <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--theme-text)' }}>Education & Experience</h3>
           <div className="space-y-6 sm:space-y-8">
             <div
@@ -171,7 +147,7 @@ export default function About() {
               </p>
             </div>
           </div>
-        </motion.div>
+        </ScrollReveal>
       </div>
     </section>
   )

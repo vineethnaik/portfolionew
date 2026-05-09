@@ -1,9 +1,19 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { projects } from '../data/projects'
+import ScrollReveal from './ScrollReveal'
 
 const cardBase =
   'work-card group relative flex h-full min-h-[280px] sm:min-h-[320px] flex-col justify-between overflow-hidden rounded-2xl p-6 sm:p-8 lg:p-10 backdrop-blur-sm transition-transform duration-300 active:scale-[0.99]'
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: index * 0.15, duration: 0.6, ease: 'easeOut' },
+  }),
+}
 
 export default function Work() {
   return (
@@ -13,37 +23,35 @@ export default function Work() {
       style={{ backgroundColor: 'var(--theme-section-bg)' }}
       aria-labelledby="work-heading"
     >
-      <div className="max-w-6xl mx-auto px-6 sm:px-8">
-        <motion.h2
+      <ScrollReveal className="max-w-6xl mx-auto px-6 sm:px-8">
+        <h2
           id="work-heading"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           className="text-sm font-medium uppercase tracking-wider mb-4"
           style={{ color: 'var(--theme-text-muted)' }}
         >
           Selected Work
-        </motion.h2>
+        </h2>
         <p
           className="mb-10 max-w-xl text-sm sm:text-base leading-relaxed"
           style={{ color: 'var(--theme-text-secondary)' }}
         >
           Explore selected projects focused on engineering quality, product outcomes, and measurable impact.
         </p>
-      </div>
+      </ScrollReveal>
 
-      <div
+      <motion.div
         className="mx-auto grid max-w-6xl grid-cols-[repeat(auto-fit,minmax(290px,1fr))] justify-center gap-5 px-6 sm:gap-6 sm:px-8 md:gap-8"
         role="list"
         aria-label="Project cards"
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
       >
         {projects.map((project, index) => (
           <motion.article
             key={project.id}
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ delay: index * 0.08, duration: 0.45 }}
+            variants={cardVariants}
+            custom={index}
             className="w-full place-self-center"
             role="listitem"
           >
@@ -143,7 +151,7 @@ export default function Work() {
             </div>
           </motion.article>
         ))}
-      </div>
+      </motion.div>
     </section>
   )
 }

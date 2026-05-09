@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { AnimatePresence, motion } from 'framer-motion'
 import AppBackground from './components/AppBackground'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -11,13 +12,31 @@ import ProjectCaseStudy from './pages/ProjectCaseStudy'
 
 function HomePage() {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+    >
       <Hero />
       <Work />
       <About />
       <Contact />
       <Footer />
-    </>
+    </motion.div>
+  )
+}
+
+function ProjectPage() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+    >
+      <ProjectCaseStudy />
+    </motion.div>
   )
 }
 
@@ -43,10 +62,12 @@ export default function App() {
       <AppBackground />
       <Navbar />
       <main>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/project/:slug" element={<ProjectCaseStudy />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={`${location.pathname}${location.hash}`}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/project/:slug" element={<ProjectPage />} />
+          </Routes>
+        </AnimatePresence>
       </main>
     </div>
   )

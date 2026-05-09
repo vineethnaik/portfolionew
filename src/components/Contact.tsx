@@ -1,73 +1,34 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xzdjgwgq'
+import { useForm, ValidationError } from '@formspree/react'
+import ScrollReveal from './ScrollReveal'
 
 export default function Contact() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [state, handleSubmit, reset] = useForm('mqenygqg')
+  const [formValues, setFormValues] = useState({ name: '', email: '', message: '' })
 
   useEffect(() => {
-    if (status !== 'success') return
+    if (!state.succeeded) return
     const t = setTimeout(() => {
-      setStatus('idle')
+      setFormValues({ name: '', email: '', message: '' })
+      reset()
     }, 5000)
     return () => clearTimeout(t)
-  }, [status])
+  }, [state.succeeded, reset])
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const form = e.currentTarget
-    const formData = new FormData(form)
-
-    setStatus('submitting')
-
-    const fetchPromise = fetch(FORMSPREE_ENDPOINT, {
-      method: 'POST',
-      body: formData,
-      headers: { Accept: 'application/json' },
-    })
-    const minLoadingTime = new Promise<void>((r) => setTimeout(r, 5000))
-
-    try {
-      const [, res] = await Promise.all([minLoadingTime, fetchPromise])
-      if (res.ok) {
-        setStatus('success')
-        form.reset()
-      } else {
-        setStatus('error')
-      }
-    } catch {
-      setStatus('error')
-    }
-  }
+  const formErrors = state.errors?.getFormErrors() ?? []
+  const showFormError = !state.succeeded && !state.submitting && formErrors.length > 0
 
   return (
     <section id="contact" className="py-24 sm:py-32 px-6 sm:px-8 backdrop-blur-[2px]" style={{ backgroundColor: 'var(--theme-section-bg)' }}>
-      <div className="max-w-3xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl sm:text-5xl font-semibold mb-6"
-          style={{ color: 'var(--theme-text)' }}
-        >
+      <ScrollReveal className="max-w-3xl mx-auto text-center">
+        <h2 className="text-4xl sm:text-5xl font-semibold mb-6" style={{ color: 'var(--theme-text)' }}>
           Let&apos;s connect and build something amazing together.
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-lg mb-12"
-          style={{ color: 'var(--theme-text-secondary)' }}
-        >
+        </h2>
+        <p className="text-lg mb-12" style={{ color: 'var(--theme-text-secondary)' }}>
           Open to impactful product engineering roles and collaboration opportunities.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="space-y-4 mb-12"
-        >
+        </p>
+        <div className="space-y-4 mb-12">
           <a
             href="mailto:vineethnaikeslavath@gmail.com"
             className="inline-flex items-center gap-2 transition-colors hover:opacity-80"
@@ -82,8 +43,7 @@ export default function Contact() {
               href="https://github.com/vineethnaik"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:opacity-100 opacity-80 text-sm sm:text-base"
-              style={{ color: 'var(--theme-text-secondary)' }}
+              className="social-link social-link-github text-sm sm:text-base"
               aria-label="Visit Vineeth Naik GitHub profile"
             >
               GitHub
@@ -92,98 +52,128 @@ export default function Contact() {
               href="https://linkedin.com/in/eslavath-vineeth-naik-a8ab16285"
               target="_blank"
               rel="noopener noreferrer"
-              className="transition-colors hover:opacity-100 opacity-80 text-sm sm:text-base"
-              style={{ color: 'var(--theme-text-secondary)' }}
+              className="social-link social-link-linkedin text-sm sm:text-base"
               aria-label="Visit Vineeth Naik LinkedIn profile"
             >
               LinkedIn
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.form
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          onSubmit={handleSubmit}
-          className="space-y-6 text-left"
-        >
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: 'var(--theme-text-secondary)' }}>
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors contact-input text-base"
-              placeholder="Your name"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--theme-text-secondary)' }}>
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="_replyto"
-              required
-              className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors contact-input text-base"
-              placeholder="your@email.com"
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: 'var(--theme-text-secondary)' }}>
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              required
-              rows={5}
-              className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors resize-none contact-input text-base"
-              placeholder="Your message"
-            />
-          </div>
-          <div className="text-center">
-            <button
-              type="submit"
-              disabled={status === 'submitting'}
-              className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 sm:py-3 rounded-2xl font-medium transition-all duration-300 min-w-[180px] text-base ${
-                status === 'success'
-                  ? 'bg-green-500 text-white'
-                  : status === 'error'
-                    ? 'theme-btn-primary'
-                    : 'theme-btn-primary disabled:opacity-70 disabled:cursor-not-allowed'
-              }`}
-            >
-              {status === 'submitting' && (
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-white animate-bounce-dot [animation-delay:0ms]" />
-                  <span className="w-2 h-2 rounded-full bg-white animate-bounce-dot [animation-delay:150ms]" />
-                  <span className="w-2 h-2 rounded-full bg-white animate-bounce-dot [animation-delay:300ms]" />
-                </span>
-              )}
-              {status === 'success' && (
-                <motion.svg
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 15 }}
-                  className="h-6 w-6 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                </motion.svg>
-              )}
-              {status === 'submitting' ? 'Sending' : status === 'success' ? 'Sent!' : status === 'error' ? 'Try again' : 'Send Message'}
-            </button>
-          </div>
-        </motion.form>
-      </div>
+        <ScrollReveal delay={0.1}>
+          <motion.form
+            onSubmit={handleSubmit}
+            className="contact-form-glow space-y-6 text-left rounded-3xl p-5 sm:p-7"
+            initial={{ boxShadow: '0 0 0 0 rgba(34, 211, 238, 0)', borderColor: 'rgba(34, 211, 238, 0)' }}
+            whileInView={{
+              boxShadow: [
+                '0 0 0 0 rgba(34, 211, 238, 0)',
+                '0 0 0 1px rgba(56, 189, 248, 0.45), 0 0 36px rgba(168, 85, 247, 0.28)',
+                '0 0 0 1px rgba(56, 189, 248, 0.28), 0 0 20px rgba(168, 85, 247, 0.18)',
+              ],
+              borderColor: ['rgba(34, 211, 238, 0)', 'rgba(56, 189, 248, 0.45)', 'rgba(56, 189, 248, 0.28)'],
+            }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            viewport={{ once: true, amount: 0.2 }}
+            style={{
+              backgroundColor: 'color-mix(in srgb, var(--theme-card-bg) 78%, transparent)',
+              borderWidth: '1px',
+              borderStyle: 'solid',
+            }}
+          >
+            <div>
+              <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: 'var(--theme-text-secondary)' }}>
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formValues.name}
+                onChange={(e) => setFormValues((prev) => ({ ...prev, name: e.target.value }))}
+                required
+                className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors contact-input text-base"
+                placeholder="Your name"
+              />
+              <ValidationError prefix="Name" field="name" errors={state.errors} className="text-sm mt-1 text-red-400" />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--theme-text-secondary)' }}>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formValues.email}
+                onChange={(e) => setFormValues((prev) => ({ ...prev, email: e.target.value }))}
+                required
+                className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors contact-input text-base"
+                placeholder="your@email.com"
+              />
+              <input type="hidden" name="_replyto" value={formValues.email} />
+              <ValidationError prefix="Email" field="email" errors={state.errors} className="text-sm mt-1 text-red-400" />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: 'var(--theme-text-secondary)' }}>
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formValues.message}
+                onChange={(e) => setFormValues((prev) => ({ ...prev, message: e.target.value }))}
+                required
+                rows={5}
+                className="w-full px-4 py-3.5 sm:py-3 rounded-2xl border focus:outline-none transition-colors resize-none contact-input text-base"
+                placeholder="Your message"
+              />
+              <input type="hidden" name="_subject" value={`Portfolio message from ${formValues.name || 'someone'}`} />
+              <ValidationError prefix="Message" field="message" errors={state.errors} className="text-sm mt-1 text-red-400" />
+            </div>
+            {showFormError && (
+              <p className="text-sm text-center text-red-400" role="alert">
+                {formErrors.map((e) => e.message).join(' ')}
+              </p>
+            )}
+            <div className="text-center">
+              <button
+                type="submit"
+                disabled={state.submitting}
+                className={`inline-flex items-center justify-center gap-2 px-8 py-3.5 sm:py-3 rounded-2xl font-medium transition-all duration-300 min-w-[180px] text-base ${
+                  state.succeeded
+                    ? 'bg-green-500 text-white'
+                    : showFormError
+                      ? 'theme-btn-primary'
+                      : 'theme-btn-primary disabled:opacity-70 disabled:cursor-not-allowed'
+                }`}
+              >
+                {state.submitting && (
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-white animate-bounce-dot [animation-delay:0ms]" />
+                    <span className="w-2 h-2 rounded-full bg-white animate-bounce-dot [animation-delay:150ms]" />
+                    <span className="w-2 h-2 rounded-full bg-white animate-bounce-dot [animation-delay:300ms]" />
+                  </span>
+                )}
+                {state.succeeded && (
+                  <motion.svg
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+                    className="h-6 w-6 flex-shrink-0"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </motion.svg>
+                )}
+                {state.submitting ? 'Sending' : state.succeeded ? 'Sent!' : showFormError ? 'Try again' : 'Send Message'}
+              </button>
+            </div>
+          </motion.form>
+        </ScrollReveal>
+      </ScrollReveal>
     </section>
   )
 }

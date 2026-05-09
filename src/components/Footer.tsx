@@ -23,8 +23,7 @@ export default function Footer() {
             href="https://github.com/vineethnaik"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 hover:-translate-y-0.5 hover:opacity-100 opacity-85"
-            style={{ color: 'var(--theme-text-secondary)' }}
+            className="social-icon social-icon-github inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 hover:-translate-y-0.5"
             aria-label="GitHub profile"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
@@ -35,8 +34,7 @@ export default function Footer() {
             href="https://linkedin.com/in/eslavath-vineeth-naik-a8ab16285"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 hover:-translate-y-0.5 hover:opacity-100 opacity-85"
-            style={{ color: 'var(--theme-text-secondary)' }}
+            className="social-icon social-icon-linkedin inline-flex h-10 w-10 items-center justify-center rounded-xl border transition-all duration-300 hover:-translate-y-0.5"
             aria-label="LinkedIn profile"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor" aria-hidden>
