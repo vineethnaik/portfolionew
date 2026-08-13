@@ -98,7 +98,7 @@ export default function About() {
           ))}
         </ScrollReveal>
 
-        <ScrollReveal className="mt-20 sm:mt-24 space-y-8 sm:space-y-12">
+        <ScrollReveal className="mt-20 sm:mt-24 space-y-8 sm:space-y-12" id="achievements">
           <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--theme-text)' }}>Key Achievements</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <div className="p-6 sm:p-8 rounded-2xl relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1" style={{ backgroundColor: 'var(--theme-card-bg)', border: '1px solid var(--theme-border)' }}>

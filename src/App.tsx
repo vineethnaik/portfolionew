@@ -8,6 +8,7 @@ import Work from './components/Work'
 import About from './components/About'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import ScrollToTop from './components/ScrollToTop'
 import ProjectCaseStudy from './pages/ProjectCaseStudy'
 
 function HomePage() {
@@ -69,6 +70,7 @@ export default function App() {
           </Routes>
         </AnimatePresence>
       </main>
+      <ScrollToTop />
     </div>
   )
 }

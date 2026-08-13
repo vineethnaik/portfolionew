@@ -6,6 +6,7 @@ import { useTheme } from '../contexts/ThemeContext'
 const navLinks = [
   { to: '/#work', label: 'Work', scrollTo: 'work' },
   { to: '/#about', label: 'About', scrollTo: 'about' },
+  { to: '/#achievements', label: 'Achievements', scrollTo: 'achievements' },
   { to: '/#contact', label: 'Contact', scrollTo: 'contact' },
 ]
 
@@ -52,7 +53,7 @@ export default function Navbar() {
       return
     }
 
-    const sectionIds = ['work', 'about', 'contact']
+    const sectionIds = ['work', 'about', 'achievements', 'contact']
     const sectionElements = sectionIds
       .map((id) => document.getElementById(id))
       .filter((el): el is HTMLElement => Boolean(el))
