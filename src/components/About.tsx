@@ -1,6 +1,7 @@
 import ScrollReveal from './ScrollReveal'
 
 const skills = {
+  'Frontend & Web': ['React', 'TypeScript', 'Tailwind CSS', 'Vite'],
   'Programming': ['Python', 'Java', 'SQL'],
   'Machine Learning': [
     'Random Forest',
@@ -39,7 +40,11 @@ export default function About() {
                 border: '1px solid var(--theme-border)',
               }}
             >
-              <span className="text-6xl font-light opacity-30" style={{ color: 'var(--theme-text)' }}>VN</span>
+              <img 
+                src="/profile.jpg" 
+                alt="Vineeth Naik" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </ScrollReveal>
           <ScrollReveal>

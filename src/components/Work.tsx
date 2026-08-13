@@ -118,15 +118,17 @@ export default function Work() {
               </div>
 
               <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href={project.liveUrl}
-                  target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
-                  rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="theme-btn-primary inline-flex items-center justify-center px-4 py-2 text-sm rounded-xl font-medium transition-all duration-300"
-                  aria-label={`View live demo for ${project.title}`}
-                >
-                  Live Demo
-                </a>
+                {project.liveUrl !== '#' && (
+                  <a
+                    href={project.liveUrl}
+                    target={project.liveUrl.startsWith('http') ? '_blank' : undefined}
+                    rel={project.liveUrl.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="theme-btn-primary inline-flex items-center justify-center px-4 py-2 text-sm rounded-xl font-medium transition-all duration-300"
+                    aria-label={`View live demo for ${project.title}`}
+                  >
+                    Live Demo
+                  </a>
+                )}
                 <a
                   href={project.githubUrl}
                   target="_blank"

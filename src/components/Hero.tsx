@@ -128,12 +128,6 @@ export default function Hero() {
         >
           I design and engineer end-to-end digital products from intuitive interfaces to resilient backend systems.
         </motion.p>
-        <motion.p
-          variants={item}
-          className="text-sm sm:text-base md:text-lg max-w-2xl mb-6 sm:mb-8 md:mb-10 lg:mb-12 leading-relaxed mx-auto px-1"
-          style={{ color: 'var(--theme-text-secondary)' }}
-        >
-        </motion.p>
         <motion.div variants={item} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
           <a
             href="/DS_and_AI_Resume.pdf"
