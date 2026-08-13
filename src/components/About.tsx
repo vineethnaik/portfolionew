@@ -34,7 +34,7 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-16 lg:gap-24">
           <ScrollReveal className="flex justify-center md:justify-start">
             <div
-              className="w-48 h-48 sm:w-56 sm:h-56 rounded-2xl flex items-center justify-center overflow-hidden transition-colors duration-500"
+              className="w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 rounded-3xl flex items-center justify-center overflow-hidden transition-colors duration-500"
               style={{
                 backgroundColor: 'var(--theme-photo-bg)',
                 border: '1px solid var(--theme-border)',
@@ -96,6 +96,32 @@ export default function About() {
               </div>
             </div>
           ))}
+        </ScrollReveal>
+
+        <ScrollReveal className="mt-20 sm:mt-24 space-y-8 sm:space-y-12">
+          <h3 className="text-xl sm:text-2xl font-semibold" style={{ color: 'var(--theme-text)' }}>Key Achievements</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div className="p-6 sm:p-8 rounded-2xl relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1" style={{ backgroundColor: 'var(--theme-card-bg)', border: '1px solid var(--theme-border)' }}>
+               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+               <h4 className="text-lg sm:text-xl font-semibold mb-2 relative z-10" style={{ color: 'var(--theme-text)' }}>TCS Prime Offer</h4>
+               <p className="text-sm sm:text-base relative z-10" style={{ color: 'var(--theme-text-secondary)' }}>Secured a highly competitive role with a 9 LPA package, demonstrating strong technical proficiency and problem-solving skills.</p>
+            </div>
+            <div className="p-6 sm:p-8 rounded-2xl relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1" style={{ backgroundColor: 'var(--theme-card-bg)', border: '1px solid var(--theme-border)' }}>
+               <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+               <h4 className="text-lg sm:text-xl font-semibold mb-2 relative z-10" style={{ color: 'var(--theme-text)' }}>GATE CS 2026 Qualified</h4>
+               <p className="text-sm sm:text-base relative z-10" style={{ color: 'var(--theme-text-secondary)' }}>Successfully qualified one of the toughest computer science examinations, validating deep core CS knowledge.</p>
+            </div>
+            <div className="p-6 sm:p-8 rounded-2xl relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1" style={{ backgroundColor: 'var(--theme-card-bg)', border: '1px solid var(--theme-border)' }}>
+               <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+               <h4 className="text-lg sm:text-xl font-semibold mb-2 relative z-10" style={{ color: 'var(--theme-text)' }}>Startup & Patent</h4>
+               <p className="text-sm sm:text-base relative z-10" style={{ color: 'var(--theme-text-secondary)' }}>Led an innovative startup idea and successfully filed a patent, showcasing entrepreneurial drive and product vision.</p>
+            </div>
+            <div className="p-6 sm:p-8 rounded-2xl relative overflow-hidden group transition-transform duration-300 hover:-translate-y-1" style={{ backgroundColor: 'var(--theme-card-bg)', border: '1px solid var(--theme-border)' }}>
+               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+               <h4 className="text-lg sm:text-xl font-semibold mb-2 relative z-10" style={{ color: 'var(--theme-text)' }}>Research Paper</h4>
+               <p className="text-sm sm:text-base relative z-10" style={{ color: 'var(--theme-text-secondary)' }}>Currently authoring a research paper to contribute novel findings and advanced insights to the tech community.</p>
+            </div>
+          </div>
         </ScrollReveal>
 
         <ScrollReveal className="mt-20 sm:mt-24 space-y-8 sm:space-y-12">
