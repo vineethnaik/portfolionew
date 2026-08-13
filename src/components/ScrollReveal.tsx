@@ -5,11 +5,13 @@ interface ScrollRevealProps {
   children: ReactNode
   className?: string
   delay?: number
+  id?: string
 }
 
-export default function ScrollReveal({ children, className, delay = 0 }: ScrollRevealProps) {
+export default function ScrollReveal({ children, className, delay = 0, id }: ScrollRevealProps) {
   return (
     <motion.div
+      id={id}
       className={className}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
